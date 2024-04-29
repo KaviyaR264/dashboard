@@ -28,7 +28,7 @@ const App = () => {
     // Your fetch data logic here
     const fetchData = async () => {
         // Simulated data fetching, replace with actual fetch call
-        const responseData = await fetch('http://134.209.145.90:8000/api/machinedata/');
+        const responseData = await fetch('https://dashboard.pinesphere.co.in/api/machinedata/');
         const fetchedData = await responseData.json();
         setData(fetchedData);
         setFilteredData(fetchedData); // Initialize filteredData with initial data

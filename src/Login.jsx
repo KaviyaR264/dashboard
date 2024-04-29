@@ -14,7 +14,7 @@ const App = () => {
 
     const onFinish = async (values) => {
         try {
-            const response = await fetch("http://134.209.145.90:8000/api/user/login/", {
+            const response = await fetch("https://dashboard.pinesphere.co.in/api/user/login/", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

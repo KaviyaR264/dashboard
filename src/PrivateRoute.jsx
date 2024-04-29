@@ -35,7 +35,7 @@ const PrivateRoute = ({ element: Element, ...rest }) => {
   useEffect(() => {
     const fetchAuthenticationStatus = async () => {
       try {
-        const response = await axios.get('http://134.209.145.90:8000/api/user/register/'); // Endpoint to check authentication status
+        const response = await axios.get('https://dashboard.pinesphere.co.in/api/user/register/'); // Endpoint to check authentication status
         setIsAuthenticated(response.data.isAuthenticated);
       } catch (error) {
         console.error('Error fetching authentication status:', error);
