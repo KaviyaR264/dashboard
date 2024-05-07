@@ -727,16 +727,16 @@ const App = () => {
       Cookies.remove('jwt');
       window.location.href = '/'; 
     };
-  const handleCSVDownload = () => {
-    const formattedData = data.map(item => ({
-      ...item,
-      
-      DATE: formatDate(item.DATE)
-  }));
-    const csvData = Papa.unparse(filteredData.length > 0 ? filteredData : formattedData);
-    const blob = new Blob([csvData], { type: 'application/vnd.ms-excel' });
-    saveAs(blob, 'data.csv');
+    const handleCSVDownload = () => {
+      const formattedData = data.map(item => ({
+          ...item,
+          DATE: formatDate(item.DATE)
+      }));
+      const csvData = Papa.unparse(formattedData);
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
+      saveAs(blob, 'data.csv');
   };
+  
   const formatDate = (dateString) => {
     const parts = dateString.split(':'); 
     const day = parts[0]; 
@@ -745,6 +745,7 @@ const App = () => {
 
     
     return `${day}/${month}/${year}`;
+ 
 };
   
   const handleHTMLDownload = () => {
