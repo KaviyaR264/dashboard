@@ -27,7 +27,7 @@ const App = () => {
   useEffect(() => {// Your fetch data logic here
     const fetchData = async () => {
        
-        const responseData = await fetch('http://127.0.0.1:8000//api/machinedata/');
+        const responseData = await fetch('https://dashboard.pinesphere.co.in/api/machinedata/');
         const fetchedData = await responseData.json();
         setData(fetchedData);
         setFilteredData(fetchedData); // Initialize filteredData with initial data
