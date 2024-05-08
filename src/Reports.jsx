@@ -36,10 +36,29 @@ const App = () => {
     fetchData();
 }, []);
 
+  function TimestampComponent({ timestamp }) {
+  const dateTime = new Date(timestamp); // Define dateTime variable here
+  const formattedDateTime = `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+
+  return (
+    <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>
+      {formattedDateTime}
+    </span>
+  );
+}
+
+// Usage:
+const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
+
+
   const columns = [
     {
-      title1:"MACHINEID",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MACHINEID</span>,
+      title1: "MACHINEID",
+      title: (
+        <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>
+          MACHINE_ID
+        </span>
+      ),
       dataIndex: 'MACHINEID',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -67,14 +86,22 @@ const App = () => {
           <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
             Reset
           </Button>
-
-          
         </div>
       ),
-      onFilter: (value, record) => record.MACHINEID.indexOf(value) === 0,
+      onFilter: (value, record) => {
+        // Check if the filter value is empty
+        if (!value) {
+          return true; // Return true for all records when filter value is empty
+        }
+        // Apply filter logic when filter value is not empty
+        return record.MACHINEID.indexOf(value) === 0;
+      },
       sorter: (a, b) => a.MACHINEID - b.MACHINEID,
       sortDirections: ['ascend', 'descend'],
     },
+    
+
+    
     {
       title1:"DATE",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DATE</span>,
@@ -115,7 +142,7 @@ const App = () => {
 
     {
       title1:"OPERATORID",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>OPERATORID</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>OPERATOR_ID</span>,
       dataIndex: 'OPERATORID',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -152,7 +179,7 @@ const App = () => {
 
     {
       title1:"STARTTIME",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>STARTTIME</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>START_TIME</span>,
       dataIndex: 'STARTTIME',
      
       filters: [
@@ -190,7 +217,7 @@ const App = () => {
 
    {
     title1:"ENDTIME",
-  title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>ENDTIME</span>,
+  title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>END_TIME</span>,
   dataIndex: 'ENDTIME',
   filters: [
     { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -264,7 +291,7 @@ const App = () => {
 
     {
       title1:"RAWSTITCHCOUNT",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>RAWSTITCHCOUNT</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>RAW_STITCH_COUNT</span>,
       dataIndex: 'RAWSTITCHCOUNT',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -294,14 +321,14 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.RAWSTITCHCOUNT.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.RAWSTITCHCOUNT}`.indexOf(value) === 0,
       sorter: (a, b) => a.RAWSTITCHCOUNT - b.RAWSTITCHCOUNT,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"INLSTITCHCOUNT",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INLSTITCHCOUNT</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INL_STITCH_COUNT</span>,
       dataIndex: 'INLSTITCHCOUNT',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -331,7 +358,7 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.INLSTITCHCOUNT.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.INLSTITCHCOUNT}`.indexOf(value) === 0,
       sorter: (a, b) => a.INLSTITCHCOUNT - b.INLSTITCHCOUNT,
       sortDirections: ['ascend', 'descend'],
     },
@@ -339,7 +366,7 @@ const App = () => {
     
     {
       title1:"INLRUNTIME",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INLRUNTIME</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INL_RUNTIME</span>,
       dataIndex: 'INLRUNTIME',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -369,14 +396,14 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.INLRUNTIME.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.INLRUNTIME}`.indexOf(value) === 0,
       sorter: (a, b) => a.INLRUNTIME - b.INLRUNTIME,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"INLSTOPTIME",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INLSTOPTIME</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INL_STOPTIME</span>,
       dataIndex: 'INLSTOPTIME',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -406,14 +433,14 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.INLSTOPTIME.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.INLSTOPTIME}`.indexOf(value) === 0,
       sorter: (a, b) => a.INLSTOPTIME - b.INLSTOPTIME,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"PICKDISPOSETIME",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>PICKDISPOSETIME</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>PICK_DISPOSE_TIME</span>,
       dataIndex: 'PICKDISPOSETIME',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -443,14 +470,14 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.PICKDISPOSETIME.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.PICKDISPOSETIME}`.indexOf(value) === 0,
       sorter: (a, b) => a.PICKDISPOSETIME- b.PICKDISPOSETIME,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"MANUALSTITCHESPERPIECE",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MANUALSTITCHESPERPIECE</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MANUAL_STITCHES_PER_PIECE</span>,
       dataIndex: 'MANUALSTITCHESPERPIECE',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -480,14 +507,14 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.MANUALSTITCHESPERPIECE.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.MANUALSTITCHESPERPIECE}`.indexOf(value) === 0,
       sorter: (a, b) => a.MANUALSTITCHESPERPIECE- b.MANUALSTITCHESPERPIECE,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"MANUALPIECECOUNT",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MANUALPIECECOUNT</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MANUAL_PIECE_COUNT</span>,
       dataIndex: 'MANUALPIECECOUNT',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -517,14 +544,14 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.MANUALPIECECOUNT.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.MANUALPIECECOUNT}`.indexOf(value) === 0,
       sorter: (a, b) => a.MANUALPIECECOUNT - b.MANUALPIECECOUNT,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"AUTOSTITCHESPERPIECE",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>AUTOSTITCHESPERPIECE</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>AUTO_STITCHES_PER_PIECE</span>,
       dataIndex: 'AUTOSTITCHESPERPIECE',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -554,7 +581,7 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.AUTOSTITCHESPERPIECE.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.AUTOSTITCHESPERPIECE}`.indexOf(value) === 0,
       sorter: (a, b) => a.AUTOSTITCHESPERPIECE - b.AUTOSTITCHESPERPIECE,
       sortDirections: ['ascend', 'descend'],
     },
@@ -563,7 +590,7 @@ const App = () => {
 
     {
       title1:"AUTOPIECECOUNT",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>AUTOPIECECOUNT</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>AUTO_PIECE_COUNT</span>,
       dataIndex: 'AUTOPIECECOUNT',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -593,14 +620,15 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.AUTOPIECECOUNT.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.AUTOPIECECOUNT}`.indexOf(value) === 0,
+
       sorter: (a, b) => a.AUTOPIECECOUNT - b.AUTOPIECECOUNT,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"CUTTERCOUNT",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>CUTTERCOUNT</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>CUTTER_COUNT</span>,
       dataIndex: 'CUTTERCOUNT',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -630,14 +658,15 @@ const App = () => {
           </Button>
         </div>
       ),
-      onFilter: (value, record) => record.CUTTERCOUNT.indexOf(value) === 0,
+      onFilter: (value, record) => `${record.CUTTERCOUNT}`.indexOf(value) === 0,
+
       sorter: (a, b) => a.CUTTERCOUNT - b.CUTTERCOUNT,
       sortDirections: ['ascend', 'descend'],
     },
 
     {
       title1:"DUMMYDATA1",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DUMMYDATA1</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DUMMY_DATA1</span>,
       dataIndex: 'DUMMYDATA1',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -674,7 +703,7 @@ const App = () => {
 
     {
       title1:"DUMMYDATA2",
-      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DUMMYDATA2</span>,
+      title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DUMMY_DATA2</span>,
       dataIndex: 'DUMMYDATA2',
       filters: [
         { text: 'Sort Smallest to Largest', value: 'asc' },
@@ -708,27 +737,57 @@ const App = () => {
       sorter: (a, b) => a.DUMMYDATA2 - b.DUMMYDATA2,
       sortDirections: ['ascend', 'descend'],
     },
-
-
-
-
+     
+    {
+      title1: "TIMESTAMP",
+      title: (
+        <span style={{ padding: '8px', display: 'inline-block' }}>
+          <span style={{ backgroundColor: '#e6f7ff', padding: '8px', borderRadius: '4px' }}>TIME_STAMP</span>
+        </span>
+      ),
+      dataIndex: 'TIMESTAMP',
+      render: (_, record) => <TimestampComponent timestamp={record.TIMESTAMP} />, // Use render to specify the rendering of data
+    }
+    
+    
+    
+    
 
 
 
   ];
+ 
+// const formattedDateTime = `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
 
+// console.log(formattedDateTime);
 
   const onChange = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
+    setFilteredData(extra.currentDataSource)
   };
+
+
   
   
     const handleLogout = () => {
       Cookies.remove('jwt');
       window.location.href = '/'; 
     };
+    const filterData = () => {
+      let filtered = data;
+  
+      // Filter by machine IDs
+      if (selectedKeys[0]) {
+          filtered = filtered.filter(item => item.MACHINEID.indexOf(selectedKeys[0]) === 0);
+      }
+  
+      
+      
+      
+  };
+    
     const handleCSVDownload = () => {
-      const formattedData = data.map(item => ({
+      const formattedData = filteredData.map(item => ({
           ...item,
           DATE: formatDate(item.DATE)
       }));
@@ -749,6 +808,7 @@ const App = () => {
 };
   
   const handleHTMLDownload = () => {
+    // filterData(); 
     const downloadData = filteredData.length > 0 ? filteredData : data;
   
     const htmlData = `
@@ -773,7 +833,13 @@ const App = () => {
     saveAs(blob, 'data.html');
   };
   
-  
+const [selectedKeys, setSelectedKeys] = useState([]);
+ 
+const resetFilters = () => {
+  setFilteredData(data);
+  setSelectedKeys([]); // Reset filtered data to the original unfiltered data
+};
+
   const applyFilters = () => {
     let filtered = data;
 
@@ -806,12 +872,13 @@ return (
   <div className="app-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}> {/* Added marginBottom */}
           <div>
-              <Button onClick={handleCSVDownload} style={{ backgroundColor: '#71b9f4', color: 'white', marginRight: '10px' }}>
+              <Button onClick={handleCSVDownload} style={{ backgroundColor: '#1890ff', color: 'white', marginRight: '10px' }}>
                   Download CSV <DownloadOutlined />
               </Button>
-              <Button onClick={handleHTMLDownload} style={{ backgroundColor: '#71b9f4', color: 'white', marginRight: '10px' }}>
+              <Button onClick={handleHTMLDownload} style={{ backgroundColor: '#1890ff', color: 'white', marginRight: '10px' }}>
                   Download HTML <DownloadOutlined />
               </Button>
+
               
           </div>
           <Button onClick={handleLogout} style={{ backgroundColor: '#ff4d4f', color: 'white' }}>
@@ -830,6 +897,9 @@ return (
           }}
       />
       <Button onClick={applyFilters} style={{ backgroundColor: '#1890ff', color: 'white', marginRight: '10px', marginLeft: '10px' }}>Apply Filters</Button>
+      <Button onClick={resetFilters} style={{ backgroundColor: '#1890ff', color: 'white', marginRight: '10px', marginLeft: '10px' }}>Reset Filters</Button>
+     
+      
       
       <div style={{ marginTop: '20px' }}>
           {filteredData.length > 0 ? (
