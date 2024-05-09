@@ -36,9 +36,15 @@ const App = () => {
     fetchData();
 }, []);
 
-  function TimestampComponent({ timestamp }) {
-  const dateTime = new Date(timestamp); // Define dateTime variable here
-  const formattedDateTime = `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+  const convertTimestamp = (isoTimestamp) => {
+  const date = new Date(isoTimestamp);
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })}`;
+  console.log("Formatted Date:", formattedDate); //
+  return formattedDate;
+};
+
+function TimestampComponent({ timestamp }) {
+  const formattedDateTime = convertTimestamp(timestamp);
 
   return (
     <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>
@@ -47,13 +53,16 @@ const App = () => {
   );
 }
 
-// Usage:
-const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
+
+const isoTimestamp = '2024-05-08T12:38:17.782104Z';
+const formattedTimestamp = convertTimestamp(isoTimestamp);
+console.log(formattedTimestamp); 
 
 
   const columns = [
     {
       title1: "MACHINEID",
+      title2:"MACHINE_ID",
       title: (
         <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>
           MACHINE_ID
@@ -104,6 +113,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
     
     {
       title1:"DATE",
+      title2:"DATE",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DATE</span>,
       dataIndex: 'DATE',
       filters: [
@@ -142,6 +152,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"OPERATORID",
+      title2:"OPERATOR_ID",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>OPERATOR_ID</span>,
       dataIndex: 'OPERATORID',
       filters: [
@@ -179,6 +190,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"STARTTIME",
+      title2:"START_TIME",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>START_TIME</span>,
       dataIndex: 'STARTTIME',
      
@@ -217,6 +229,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
    {
     title1:"ENDTIME",
+    title2:"END_TIME",
   title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>END_TIME</span>,
   dataIndex: 'ENDTIME',
   filters: [
@@ -254,6 +267,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"MODE",
+      title2:"MODE",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MODE</span>,
       dataIndex: 'MODE',
       filters: [
@@ -291,6 +305,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"RAWSTITCHCOUNT",
+      title2:"RAW_STITCH_COUNT",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>RAW_STITCH_COUNT</span>,
       dataIndex: 'RAWSTITCHCOUNT',
       filters: [
@@ -328,6 +343,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"INLSTITCHCOUNT",
+      title2:"INL_STITCH_COUNT",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INL_STITCH_COUNT</span>,
       dataIndex: 'INLSTITCHCOUNT',
       filters: [
@@ -366,6 +382,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
     
     {
       title1:"INLRUNTIME",
+      title2:"INL_RUN_TIME",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INL_RUNTIME</span>,
       dataIndex: 'INLRUNTIME',
       filters: [
@@ -403,6 +420,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"INLSTOPTIME",
+      title2:"INL_STOP_TIME",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>INL_STOPTIME</span>,
       dataIndex: 'INLSTOPTIME',
       filters: [
@@ -440,6 +458,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"PICKDISPOSETIME",
+      title2:"PICK_DISPOSE_TIME",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>PICK_DISPOSE_TIME</span>,
       dataIndex: 'PICKDISPOSETIME',
       filters: [
@@ -477,6 +496,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"MANUALSTITCHESPERPIECE",
+      title2:"MANUAL_STITCHES_PER_PIECE",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MANUAL_STITCHES_PER_PIECE</span>,
       dataIndex: 'MANUALSTITCHESPERPIECE',
       filters: [
@@ -514,6 +534,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"MANUALPIECECOUNT",
+      title2:"MANUAL_PIECE_COUNT",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>MANUAL_PIECE_COUNT</span>,
       dataIndex: 'MANUALPIECECOUNT',
       filters: [
@@ -551,6 +572,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"AUTOSTITCHESPERPIECE",
+      title2:"AUTO_STITCHES_PER_PIECE",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>AUTO_STITCHES_PER_PIECE</span>,
       dataIndex: 'AUTOSTITCHESPERPIECE',
       filters: [
@@ -590,6 +612,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"AUTOPIECECOUNT",
+      title2:"AUTO_PIECE_COUNT",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>AUTO_PIECE_COUNT</span>,
       dataIndex: 'AUTOPIECECOUNT',
       filters: [
@@ -628,6 +651,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"CUTTERCOUNT",
+      title2:"CUTTER_COUNT",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>CUTTER_COUNT</span>,
       dataIndex: 'CUTTERCOUNT',
       filters: [
@@ -666,6 +690,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"DUMMYDATA1",
+      title2:"DUMMY_DATA1",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DUMMY_DATA1</span>,
       dataIndex: 'DUMMYDATA1',
       filters: [
@@ -703,6 +728,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
 
     {
       title1:"DUMMYDATA2",
+      title2:"DUMMY_DATA2",
       title: <span style={{ backgroundColor: '#e6f7ff', padding: '8px', display: 'inline-block', borderRadius: '4px' }}>DUMMY_DATA2</span>,
       dataIndex: 'DUMMYDATA2',
       filters: [
@@ -740,6 +766,7 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
      
     {
       title1: "TIMESTAMP",
+      title2: "TIME_STAMP",
       title: (
         <span style={{ padding: '8px', display: 'inline-block' }}>
           <span style={{ backgroundColor: '#e6f7ff', padding: '8px', borderRadius: '4px' }}>TIME_STAMP</span>
@@ -786,53 +813,48 @@ const yourTimestampValue = "2024-05-08T12:38:17.782104Z";
       
   };
     
-    const handleCSVDownload = () => {
-      const formattedData = filteredData.map(item => ({
-          ...item,
-          DATE: formatDate(item.DATE)
-      }));
-      const csvData = Papa.unparse(formattedData);
-      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
-      saveAs(blob, 'data.csv');
-  };
-  
-  const formatDate = (dateString) => {
-    const parts = dateString.split(':'); 
-    const day = parts[0]; 
-    const month = parts[1]; 
-    const year = parts[2]; 
-
-    
-    return `${day}/${month}/${year}`;
- 
+  const handleCSVDownload = () => {
+    const formattedData = filteredData.map(item => ({
+        ...item,
+        TIMESTAMP: convertTimestamp(item.TIMESTAMP) // Use formatted date here
+    }));
+    console.log("Formatted CSV Data:", formattedData); // Check the formatted data
+    const csvData = Papa.unparse(formattedData);
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
+    saveAs(blob, 'data.csv');
 };
-  
-  const handleHTMLDownload = () => {
-    // filterData(); 
-    const downloadData = filteredData.length > 0 ? filteredData : data;
-  
-    const htmlData = `
-      <html>
-      <head><title>Data</title></head>
-      <body>
-        <table>
+
+const handleHTMLDownload = () => {
+  const downloadData = filteredData.length > 0 ? filteredData : data;
+
+  const formattedDownloadData = downloadData.map(item => ({
+      ...item,
+      TIMESTAMP: convertTimestamp(item.TIMESTAMP) // Use formatted date here
+  }));
+  console.log("Formatted HTML Data:", formattedDownloadData); // Check the formatted data
+
+  const htmlData = `
+  <html>
+  <head><title>Data</title></head>
+  <body>
+      <table>
           <thead>
-            <tr>
-              ${columns.map(column => `<th>${column.title1}</th>`).join('')}
-            </tr>
+              <tr>
+                  ${columns.map(column => `<th>${column.title2}</th>`).join('')}
+              </tr>
           </thead>
           <tbody>
-            ${downloadData.map(row => `<tr>${columns.map(column => `<td>${row[column.dataIndex]}</td>`).join('')}</tr>`).join('')}
+              ${formattedDownloadData.map(row => `<tr>${columns.map(column => `<td>${row[column.dataIndex]}</td>`).join('')}</tr>`).join('')}
           </tbody>
-        </table>
-      </body>
-      </html>
-    `;
-  
-    const blob = new Blob([htmlData], { type: 'text/html;charset=utf-8' });
-    saveAs(blob, 'data.html');
-  };
-  
+      </table>
+  </body>
+  </html>
+  `;
+
+  const blob = new Blob([htmlData], { type: 'text/html;charset=utf-8' });
+  saveAs(blob, 'data.html');
+};
+
 const [selectedKeys, setSelectedKeys] = useState([]);
  
 const resetFilters = () => {
